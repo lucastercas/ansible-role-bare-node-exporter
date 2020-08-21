@@ -1,0 +1,15 @@
+---
+dependencies: []
+
+galaxy_info:
+  role_name: bare-node-exporter
+  author: lucastercas
+  description: ""
+  company: ""
+  license: "license (BSD, MIT)"
+  min_ansible_version: 2.4
+  galaxy_tags:
+    - prometheus
+    - node-exporter
+    - container
+    - node
