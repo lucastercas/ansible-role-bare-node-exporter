@@ -1,0 +1,23 @@
+---
+- name: Install pip3 package
+  package:
+    name: python3-pip
+    state: present
+
+- name: Install pip modules
+  pip:
+    executable: /usr/bin/pip3
+    name: docker
+
+- name: Run node-exporter container
+  docker_container:
+    name: prometheus-exporter
+    image: prom/node-exporter
+    state: started
+    ports:
+      - 9100:9100
+    volumes:
+      - /proc:/host/proc
+      - /sys:/host/sys
+      - /:/rootfs
+    command: '--path.procfs=/host/proc --path.sysfs=/host/sys --collector.filesystem.ignored-mount-points="^(/rootfs|/host|)/(sys|proc|dev|host|etc)($$|/)" --collector.filesystem.ignored-fs-types="^(sys|proc|auto|cgroup|devpts|ns|au|fuse\.lxc|mqueue)(fs|)$$"'
